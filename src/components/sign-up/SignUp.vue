@@ -37,8 +37,8 @@
                     <v-text-field
                       outlined
                       dense
-                      label="UserName"
                       hint="You can use letters, numbers & periods"
+                      label="UserName"
                       suffix="@gmail.com"
                       v-model="email"
                       :rules="rulesForEmail"
@@ -68,14 +68,22 @@
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm12 md12 lg12 class="pl-1">
-                      <span style="font-size:13px">Use 8 or more characters with a mix of letters, numbers & symbols</span>
+                    <span style="font-size: 13px">
+                      Use 8 or more characters with a mix of uppercase, lowercase, number and special character
+                    </span>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12 lg12 class="mt-10 pt-3">
+                    <v-btn text color="primary" class="pl-0 sign-in-instead">
+                      Sign In Instead
+                    </v-btn>
+                    <v-btn color="primary" class="sign-up-next"> Next </v-btn>
                   </v-flex>
                 </v-layout>
               </div>
             </v-flex>
 
-            <v-flex md5 lg5 xl5 class="pa-2 my-10 sconndery-module">
-              <v-flex md0>
+            <v-flex md5 lg5 xl5 class="pa-10 my-10 sconndery-module">
+              <v-flex>
                 <img
                   src="../../assets/account.png"
                   alt=""
@@ -88,7 +96,7 @@
         </v-flex>
 
         <v-flex xs12 sm12 md12 lg12 xl12 class="mt-3 footer">
-            <span>footer</span>
+          <span>footer</span>
         </v-flex>
       </v-layout>
     </div>
@@ -102,8 +110,8 @@ export default {
   data() {
     return {
       email: "",
-      password: '',
-      confirmPassword: '',
+      password: "",
+      confirmPassword: "",
       passwordShow: false,
       rulesForName: [
         (value) => !!value || "Required.",
@@ -127,10 +135,16 @@ export default {
         (value) => (value || "").length >= 8 || "Min 8 characters",
         (value) => {
           const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[*.!@$%^&(){}:;<>,?/~_+=|]).{8,}$/;
-          return pattern.test(value) || "Invalid e-main";
+          return (
+            pattern.test(value) ||
+            "Invalid Password"
+          );
         },
         (value) => {
-          return this.password == (value) || "Invalid e-main";
+          return (
+            this.password == value ||
+            "Invalid Password"
+          );
         },
       ],
     };
@@ -150,6 +164,9 @@ export default {
   margin: inherit;
   padding: inherit;
 }
+.sconndery-module {
+  align-self: center;
+}
 .account-image {
   height: 100%;
   width: 98%;
@@ -159,18 +176,23 @@ export default {
 }
 .input {
   padding: 5px;
+  padding-bottom: 0;
+}
+
+.sign-up-next {
+  float: right;
 }
 .v-text-field.v-text-field--enclosed .v-text-field__details {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 /* .footer {
 } */
-/* @media screen and (max-width: 960px) {
-  .sconndery-module{
-      display: none;
+@media screen and (max-width: 960px) {
+  .sconndery-module {
+    display: none;
   }
   .sign-up-page {
-      width: 80%;
+    width: 80%;
   }
-} */
+}
 </style>
