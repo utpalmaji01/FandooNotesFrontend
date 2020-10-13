@@ -23,7 +23,8 @@
                       dense
                       label="First Name"
                       autocomplete="off"
-                      :rules="rulesForName"
+                      v-model="firstName"
+                      :rules="rulesForFirstName"
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm12 md6 lg6 class="input">
@@ -32,7 +33,8 @@
                       dense
                       label="Last Name"
                       autocomplete="off"
-                      :rules="rulesForName"
+                      v-model="lastName"
+                      :rules="rulesForLastName"
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm12 md12 lg12 class="input">
@@ -82,7 +84,7 @@
                     <v-btn text color="primary" class="px-0 sign-in-instead">
                       Sign In Instead
                     </v-btn>
-                    <v-btn color="primary" class="sign-up-next"> Next </v-btn>
+                    <v-btn color="primary" class="sign-up-next" @click="addPerson"> Next </v-btn>
                   </v-flex>
                 </v-layout>
               </div>
@@ -104,13 +106,16 @@
         <v-flex xs12 sm12 md12 lg12 xl12 class="mt-3 footer">
           <v-layout row wrap class="pl-3">
             <v-flex xs9 sm9 md9>
-                <span>name: {{nameFlag}} email : {{userNameFlag}} pass: {{passwordFlag}} pass1{{password}}</span>
+              <span
+                >name: {{ firstNameFlag }} email : {{ userNameFlag }} pass:
+                {{ passwordFlag }} pass1{{ password }}</span
+              >
             </v-flex>
             <v-flex xs1 sm1 md1>
               <span></span>
             </v-flex>
             <v-flex xs1 sm1 md1>
-              <span>{{confirmPassword}}</span>
+              <span>{{ confirmPassword }}</span>
             </v-flex>
             <v-flex xs1 sm1 md1>
               <span>Terms</span>
@@ -128,29 +133,41 @@ export default {
   components: {},
   data() {
     return {
+      firstName: '',
+      lastName: '',
       email: "",
       password: "",
       confirmPassword: "",
-      nameFlag: false,
+      firstNameFlag: false,
+      lastNameFlag: false,
       userNameFlag: false,
       passwordFlag: false,
-      name:"fdjfe",
+      name: "fdjfe",
       passwordShow: false,
-      rulesForName: [
+      rulesForFirstName: [
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 3 || "Min 3 characters",
         (value) => {
-          const pattern = /^[A-Z]{1}[a-z]{2,}$/;
-          return pattern.test(value) ?this.nameFlag =true: "Invalid name.";
+          const pattern = /^[A-Za-z]{3,}$/;
+          return pattern.test(value) ? (this.firstNameFlag = true) : "Invalid name.";
+        },
+      ],
+      rulesForLastName: [
+        (value) => !!value || "Required.",
+        (value) => (value || "").length >= 3 || "Min 3 characters",
+        (value) => {
+          const pattern = /^[A-Za-z]{3,}$/;
+          return pattern.test(value) ? (this.lastNameFlag = true) : "Invalid name.";
         },
       ],
       rulesForEmail: [
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 8 || "Min 8 characters",
         (value) => {
-          const pattern = /^[0-9a-z]+[+_.-]?[0-9a-z]/;
-          //const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return pattern.test(value) ?this.userNameFlag==true :"Invalid e-main";
+          const pattern = /^[0-9a-z]+[+_.-]?[0-9a-z]{1,}$/;
+          return pattern.test(value)
+            ? (this.userNameFlag = true)
+            : "Invalid e-main";
         },
       ],
       rulesForPass: [
@@ -158,19 +175,31 @@ export default {
         (value) => (value || "").length >= 8 || "Min 8 characters",
         (value) => {
           const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[*.!@$%^&(){}:;<>,?/~_+=|]).{8,}$/;
-          return (pattern.test(value)) || "Invalid Password";
+          return pattern.test(value) || "Invalid Password";
         },
       ],
-        rulesForConfirmPass: [
+      rulesForConfirmPass: [
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 8 || "Min 8 characters",
         (value) => {
           const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[*.!@$%^&(){}:;<>,?/~_+=|]).{8,}$/;
-          return ((pattern.test(value)) && (this.password == value)) ?this.passwordFlag =true: "Invalid Password";
+          return pattern.test(value) && this.password == value
+            ? (this.passwordFlag = true)
+            : "Invalid Password";
         },
       ],
     };
   },
+  methods: {
+    addPerson: function(){
+      if(this.firstNameFlag && this.lastNameFlag && this.userNameFlag && this.passwordFlag){
+        let name = this.firstName + ' ' + this.lastName;
+        let userName = this.email + '@gmail.com';
+        let password = this.password;
+        console.log(name+' ' +' ' + userName+' '+' '+ password)
+      }
+    }
+  }
 };
 </script>
 
