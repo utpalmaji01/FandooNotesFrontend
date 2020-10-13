@@ -84,7 +84,13 @@
                     <v-btn text color="primary" class="px-0 sign-in-instead">
                       Sign In Instead
                     </v-btn>
-                    <v-btn color="primary" class="sign-up-next" @click="addPerson"> Next </v-btn>
+                    <v-btn
+                      color="primary"
+                      class="sign-up-next"
+                      @click="addPerson"
+                    >
+                      Next
+                    </v-btn>
                   </v-flex>
                 </v-layout>
               </div>
@@ -112,7 +118,7 @@
               >
             </v-flex>
             <v-flex xs1 sm1 md1>
-              <span></span>
+              <span>{{ UserDetails }}</span>
             </v-flex>
             <v-flex xs1 sm1 md1>
               <span>{{ confirmPassword }}</span>
@@ -128,13 +134,17 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "SignUp",
   components: {},
   data() {
     return {
-      firstName: '',
-      lastName: '',
+      UserDetailsPath:'../../img/UserDetails.json',
+      UserDetails: [],
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -142,14 +152,15 @@ export default {
       lastNameFlag: false,
       userNameFlag: false,
       passwordFlag: false,
-      name: "fdjfe",
       passwordShow: false,
       rulesForFirstName: [
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 3 || "Min 3 characters",
         (value) => {
           const pattern = /^[A-Za-z]{3,}$/;
-          return pattern.test(value) ? (this.firstNameFlag = true) : "Invalid name.";
+          return pattern.test(value)
+            ? (this.firstNameFlag = true)
+            : "Invalid name.";
         },
       ],
       rulesForLastName: [
@@ -157,7 +168,9 @@ export default {
         (value) => (value || "").length >= 3 || "Min 3 characters",
         (value) => {
           const pattern = /^[A-Za-z]{3,}$/;
-          return pattern.test(value) ? (this.lastNameFlag = true) : "Invalid name.";
+          return pattern.test(value)
+            ? (this.lastNameFlag = true)
+            : "Invalid name.";
         },
       ],
       rulesForEmail: [
@@ -191,59 +204,39 @@ export default {
     };
   },
   methods: {
-    addPerson: function(){
-      if(this.firstNameFlag && this.lastNameFlag && this.userNameFlag && this.passwordFlag){
-        let name = this.firstName + ' ' + this.lastName;
-        let userName = this.email + '@gmail.com';
-        let password = this.password;
-        console.log(name+' ' +' ' + userName+' '+' '+ password)
+    addPerson: function () {
+      if (
+        this.firstNameFlag &&
+        this.lastNameFlag &&
+        this.userNameFlag &&
+        this.passwordFlag
+      ) {
+        axios
+          .post(this.UserDetailsPath, {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            userName: this.email + "@gmail.com",
+            password: this.password,
+          })
+          .then(
+            (response) => {
+              console.log(response);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
       }
-    }
-  }
+    },
+  },
+  // created: function () {
+  //   axios
+  //     .get("../../UserDetails.json")
+  //     .then((response) => (this.UserDetails = response.data));
+  // },
 };
 </script>
 
-<style scoped>
-.sign-up-page {
-  width: 60%;
-}
-.main-container {
-  border: 1px solid #999;
-  border-radius: 5px;
-}
-.main-module {
-  margin: inherit;
-  padding: inherit;
-}
-.sconndery-module {
-  align-self: center;
-}
-.account-image {
-  height: 100%;
-  width: 98%;
-}
-.heading {
-  font-size: larger;
-}
-.input {
-  padding: 5px;
-  padding-bottom: 0;
-}
+<style src="../../css/SignUp.css" scoped>
 
-.sign-up-next {
-  float: right;
-}
-.v-text-field.v-text-field--enclosed .v-text-field__details {
-  margin-bottom: 0;
-}
-/* .footer {
-} */
-@media screen and (max-width: 960px) {
-  .sconndery-module {
-    display: none;
-  }
-  .sign-up-page {
-    width: 80%;
-  }
-}
 </style>

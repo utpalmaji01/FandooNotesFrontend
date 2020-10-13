@@ -1,19 +1,21 @@
 <template>
   <v-app>
     <v-main>
-      <home></home>
+      <v-app>
+        <sign-up></sign-up>
+      </v-app>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Home from './components/Home';
+import SignUp from "./components/core/SignUp";
 
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-    'home': Home,
+    "sign-up": SignUp,
   },
 
   data: () => ({

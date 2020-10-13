@@ -1,0 +1,48 @@
+.sign-up-page {
+    width: 60%;
+}
+
+.main-container {
+    border: 1px solid #999;
+    border-radius: 5px;
+}
+
+.main-module {
+    margin: inherit;
+    padding: inherit;
+}
+
+.sconndery-module {
+    align-self: center;
+}
+
+.account-image {
+    height: 100%;
+    width: 98%;
+}
+
+.heading {
+    font-size: larger;
+}
+
+.input {
+    padding: 5px;
+    padding-bottom: 0;
+}
+
+.sign-up-next {
+    float: right;
+}
+
+.v-text-field.v-text-field--enclosed .v-text-field__details {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 960px) {
+    .sconndery-module {
+        display: none;
+    }
+    .sign-up-page {
+        width: 80%;
+    }
+}
