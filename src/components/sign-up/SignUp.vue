@@ -22,6 +22,7 @@
                       outlined
                       dense
                       label="First Name"
+                      autocomplete="off"
                       :rules="rulesForName"
                     ></v-text-field>
                   </v-flex>
@@ -30,6 +31,7 @@
                       outlined
                       dense
                       label="Last Name"
+                      autocomplete="off"
                       :rules="rulesForName"
                     ></v-text-field>
                   </v-flex>
@@ -39,6 +41,7 @@
                       dense
                       hint="You can use letters, numbers & periods"
                       label="UserName"
+                      autocomplete="off"
                       suffix="@gmail.com"
                       v-model="email"
                       :rules="rulesForEmail"
@@ -52,6 +55,7 @@
                       :rules="rulesForPass"
                       :type="passwordShow ? 'text' : 'password'"
                       label="Password"
+                      autocomplete="off"
                       @click:append="passwordShow = !passwordShow"
                     ></v-text-field>
                   </v-flex>
@@ -64,16 +68,18 @@
                       :rules="rulesForPass"
                       :type="passwordShow ? 'text' : 'password'"
                       label="Confirm Password"
+                      autocomplete="off"
                       @click:append="passwordShow = !passwordShow"
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm12 md12 lg12 class="pl-1">
                     <span style="font-size: 13px">
-                      Use 8 or more characters with a mix of uppercase, lowercase, number and special character
+                      Use 8 or more characters with a mix of uppercase,
+                      lowercase, number and special character
                     </span>
                   </v-flex>
                   <v-flex xs12 sm12 md12 lg12 class="mt-10 pt-3">
-                    <v-btn text color="primary" class="pl-0 sign-in-instead">
+                    <v-btn text color="primary" class="px-0 sign-in-instead">
                       Sign In Instead
                     </v-btn>
                     <v-btn color="primary" class="sign-up-next"> Next </v-btn>
@@ -96,7 +102,20 @@
         </v-flex>
 
         <v-flex xs12 sm12 md12 lg12 xl12 class="mt-3 footer">
-          <span>footer</span>
+          <v-layout row wrap class="pl-3">
+            <v-flex xs9 sm9 md9>
+                <span>Lorem ipsum dolor sit amet.</span>
+            </v-flex>
+            <v-flex xs1 sm1 md1>
+              <span>Help</span>
+            </v-flex>
+            <v-flex xs1 sm1 md1>
+              <span>Privacy</span>
+            </v-flex>
+            <v-flex xs1 sm1 md1>
+              <span>Terms</span>
+            </v-flex>
+          </v-layout>
         </v-flex>
       </v-layout>
     </div>
@@ -135,16 +154,10 @@ export default {
         (value) => (value || "").length >= 8 || "Min 8 characters",
         (value) => {
           const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[*.!@$%^&(){}:;<>,?/~_+=|]).{8,}$/;
-          return (
-            pattern.test(value) ||
-            "Invalid Password"
-          );
+          return pattern.test(value) || "Invalid Password";
         },
         (value) => {
-          return (
-            this.password == value ||
-            "Invalid Password"
-          );
+          return this.password == value || "Invalid Password";
         },
       ],
     };
