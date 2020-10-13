@@ -65,7 +65,7 @@
                       dense
                       v-model="confirmPassword"
                       :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
-                      :rules="rulesForPass"
+                      :rules="rulesForConfirmPass"
                       :type="passwordShow ? 'text' : 'password'"
                       label="Confirm Password"
                       autocomplete="off"
@@ -88,7 +88,7 @@
               </div>
             </v-flex>
 
-            <v-flex md5 lg5 xl5 class="pa-10 my-10 sconndery-module">
+            <v-flex md5 lg5 xl5 class="pa-15 my-10 sconndery-module">
               <v-flex>
                 <img
                   src="../../assets/account.png"
@@ -104,13 +104,13 @@
         <v-flex xs12 sm12 md12 lg12 xl12 class="mt-3 footer">
           <v-layout row wrap class="pl-3">
             <v-flex xs9 sm9 md9>
-                <span>Lorem ipsum dolor sit amet.</span>
+                <span>name: {{nameFlag}} email : {{userNameFlag}} pass: {{passwordFlag}} pass1{{password}}</span>
             </v-flex>
             <v-flex xs1 sm1 md1>
-              <span>Help</span>
+              <span></span>
             </v-flex>
             <v-flex xs1 sm1 md1>
-              <span>Privacy</span>
+              <span>{{confirmPassword}}</span>
             </v-flex>
             <v-flex xs1 sm1 md1>
               <span>Terms</span>
@@ -131,13 +131,17 @@ export default {
       email: "",
       password: "",
       confirmPassword: "",
+      nameFlag: false,
+      userNameFlag: false,
+      passwordFlag: false,
+      name:"fdjfe",
       passwordShow: false,
       rulesForName: [
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 3 || "Min 3 characters",
         (value) => {
           const pattern = /^[A-Z]{1}[a-z]{2,}$/;
-          return pattern.test(value) || "Invalid name.";
+          return pattern.test(value) ?this.nameFlag =true: "Invalid name.";
         },
       ],
       rulesForEmail: [
@@ -146,18 +150,23 @@ export default {
         (value) => {
           const pattern = /^[0-9a-z]+[+_.-]?[0-9a-z]/;
           //const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return pattern.test(value) || "Invalid e-main";
+          return pattern.test(value) ?this.userNameFlag==true :"Invalid e-main";
         },
       ],
       rulesForPass: [
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 8 || "Min 8 characters",
         (value) => {
-          const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[*.!@$%^&(){}:;<>,?/~_+=|]).{8,}$/;
-          return pattern.test(value) || "Invalid Password";
+          const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[*.!@$%^&(){}:;<>,?/~_+=|]).{8,}$/;
+          return (pattern.test(value)) || "Invalid Password";
         },
+      ],
+        rulesForConfirmPass: [
+        (value) => !!value || "Required.",
+        (value) => (value || "").length >= 8 || "Min 8 characters",
         (value) => {
-          return this.password == value || "Invalid Password";
+          const pattern = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[*.!@$%^&(){}:;<>,?/~_+=|]).{8,}$/;
+          return ((pattern.test(value)) && (this.password == value)) ?this.passwordFlag =true: "Invalid Password";
         },
       ],
     };
