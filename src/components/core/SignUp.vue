@@ -10,10 +10,12 @@
                   <v-flex xs12 sm12 md12>
                     <div class="my-2 mx-1">
                       <div class="mb-1">
-                        <b class="blue--text heading">Google</b>
+                        <b class="blue--text">G</b><b class="red--text">o</b
+                        ><b class="orange--text">o</b><b class="blue--text">g</b
+                        ><b class="green--text">l</b><b class="red--text">e</b>
                       </div>
                       <div class="mb-3">
-                        <b class="heading">Create your Google Account</b>
+                        <b>Create your Google Account</b>
                       </div>
                     </div>
                   </v-flex>
@@ -134,15 +136,21 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "SignUp",
   components: {},
   data() {
     return {
-      UserDetailsPath:'../../img/UserDetails.json',
-      UserDetails: [],
+      UserDetails: [
+        {
+          firstName: "utpal",
+          lastName: "maji",
+          userName: "utpalmaji" + "@gmail.com",
+          password: "Utpalmaji@9",
+        },
+      ],
       firstName: "",
       lastName: "",
       email: "",
@@ -211,12 +219,17 @@ export default {
         this.userNameFlag &&
         this.passwordFlag
       ) {
+        let arrObj = {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          userName: this.email + "@gmail.com",
+          password: this.password,
+        };
+        // this.UserDetails.push(arrObj);
+
         axios
-          .post(this.UserDetailsPath, {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            userName: this.email + "@gmail.com",
-            password: this.password,
+          .post("../../../UserDetails.json", {
+            arrObj,
           })
           .then(
             (response) => {
@@ -229,14 +242,8 @@ export default {
       }
     },
   },
-  // created: function () {
-  //   axios
-  //     .get("../../UserDetails.json")
-  //     .then((response) => (this.UserDetails = response.data));
-  // },
 };
 </script>
 
 <style src="../../css/SignUp.css" scoped>
-
 </style>
