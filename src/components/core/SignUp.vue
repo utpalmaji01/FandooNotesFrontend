@@ -10,9 +10,9 @@
                   <v-flex xs12 sm12 md12>
                     <div class="my-2 mx-1">
                       <div class="mb-1">
-                        <b class="blue--text">G</b><b class="red--text">o</b
-                        ><b class="orange--text">o</b><b class="blue--text">g</b
-                        ><b class="green--text">l</b><b class="red--text">e</b>
+                        <b class="blue--text">F</b><b class="red--text">u</b
+                        ><b class="orange--text">n</b><b class="blue--text">d</b
+                        ><b class="green--text">o</b><b class="red--text">o</b>
                       </div>
                       <div class="mb-3">
                         <b>Create your Google Account</b>
@@ -84,7 +84,9 @@
                   </v-flex>
                   <v-flex xs12 sm12 md12 lg12 class="mt-10 pt-3">
                     <v-btn text color="primary" class="px-0 sign-in-instead">
-                      Sign In Instead
+                      <router-link to="/log-in" style="text-decoration: none"
+                        >Sign In Instead</router-link
+                      >
                     </v-btn>
                     <v-btn
                       color="primary"
@@ -111,25 +113,7 @@
           </v-layout>
         </v-flex>
 
-        <v-flex xs12 sm12 md12 lg12 xl12 class="mt-3 footer">
-          <v-layout row wrap class="pl-3">
-            <v-flex xs9 sm9 md9>
-              <span
-                >name: {{ firstNameFlag }} email : {{ userNameFlag }} pass:
-                {{ passwordFlag }} pass1{{ password }}</span
-              >
-            </v-flex>
-            <v-flex xs1 sm1 md1>
-              <span>{{ UserDetails }}</span>
-            </v-flex>
-            <v-flex xs1 sm1 md1>
-              <span>{{ confirmPassword }}</span>
-            </v-flex>
-            <v-flex xs1 sm1 md1>
-              <span>Terms</span>
-            </v-flex>
-          </v-layout>
-        </v-flex>
+        <v-flex xs12 sm12 md12 lg12 xl12 class="mt-3 footer"> </v-flex>
       </v-layout>
     </div>
   </div>
@@ -143,14 +127,6 @@ export default {
   components: {},
   data() {
     return {
-      UserDetails: [
-        {
-          firstName: "utpal",
-          lastName: "maji",
-          userName: "utpalmaji" + "@gmail.com",
-          password: "Utpalmaji@9",
-        },
-      ],
       firstName: "",
       lastName: "",
       email: "",
@@ -219,26 +195,23 @@ export default {
         this.userNameFlag &&
         this.passwordFlag
       ) {
-        let arrObj = {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          userName: this.email + "@gmail.com",
-          password: this.password,
-        };
-        // this.UserDetails.push(arrObj);
-
         axios
-          .post("../../../UserDetails.json", {
-            arrObj,
-          })
-          .then(
-            (response) => {
-              console.log(response);
-            },
-            (error) => {
-              console.log(error);
+          .post(
+            "http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp",
+            {
+              firstName: this.firstName,
+              lastName: this.lastName,
+              email: this.email + "@gmail.com",
+              password: this.password,
+              service: "advance",
             }
-          );
+          )
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       }
     },
   },

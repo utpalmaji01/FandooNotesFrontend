@@ -1,0 +1,33 @@
+.log-in-page {
+    margin-top: 4rem;
+    width: 37%;
+    align-self: center;
+}
+
+.main-container {
+    border: 1px solid #999;
+    border-radius: 5px;
+}
+
+.text {
+    text-align: center;
+}
+
+.main-module {
+
+}
+
+.input {
+    padding: 5px;
+    padding-bottom: 0;
+}
+
+.sign-in-next {
+    float: right;
+}
+
+@media screen and (max-width: 960px) {
+    .log-in-page {
+        width: 50%;
+    }
+}

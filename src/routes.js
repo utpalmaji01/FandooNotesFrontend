@@ -1,10 +1,8 @@
-import App from './App.vue';
 import SignUp from './components/core/SignUp.vue';
+import LogIn from './components/core/LogIn.vue';
+
 
 export default [
-    { path: '/', component: App,
-    children: [
-        {path: 'sign-up', component: SignUp},
-    ]},
-    
+    { path: '/', component: SignUp },
+    { path: '/log-in', component: LogIn },
 ]
