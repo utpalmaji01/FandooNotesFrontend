@@ -35,6 +35,8 @@
             </v-flex>
             <v-flex xs12 sm12 md12 lg12 class="my-8 mx-5 pt-3">
               <v-btn color="primary" class="mb-5 submit-buttom" @click="sendResetLink">
+                  <!-- <router-link to="/reset-password" style="text-decoration: none; text-transform: none"
+                        >Submit</router-link> -->
                 Submit
               </v-btn>
             </v-flex>
@@ -54,10 +56,7 @@ export default {
   data() {
     return {
       email: "",
-      password: "",
-      passwordShow: false,
       emailFlag: false,
-      passwordFlag: false,
       rulesForEmail: [
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 8 || "Min 8 characters",
@@ -72,7 +71,9 @@ export default {
   },
   methods: {
       sendResetLink: function() {
-
+          if (this.emailFlag) {
+              console.log(this.email);
+          }
       }
    },
 };
