@@ -84,9 +84,8 @@
                   </v-flex>
                   <v-flex xs12 sm12 md12 lg12 class="mt-10 pt-3">
                     <v-btn text color="primary" class="px-0 sign-in-instead">
-                      <router-link to="/log-in" style="text-decoration: none"
-                        >Sign In Instead</router-link
-                      >
+                      <router-link to="/log-in" style="text-decoration: none; text-transform: none"
+                        >Sign In Instead</router-link>
                     </v-btn>
                     <v-btn
                       color="primary"
@@ -197,7 +196,7 @@ export default {
       ) {
         axios
           .post(
-            "http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp",
+            'http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp',
             {
               firstName: this.firstName,
               lastName: this.lastName,
@@ -208,6 +207,11 @@ export default {
           )
           .then(function (response) {
             console.log(response);
+            if (response.status == 200) {
+                  this.$router.push({ path: '/log-in' });
+              } else {
+                  alert("sign up un-successfull");
+              }
           })
           .catch(function (error) {
             console.log(error);

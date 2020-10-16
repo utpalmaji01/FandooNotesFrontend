@@ -24,7 +24,7 @@
                 outlined
                 dense
                 hint="You can use letters, numbers & periods"
-                label="UserName"
+                label="Email"
                 autocomplete="off"
                 v-model="email"
                 :rules="rulesForEmail"
@@ -44,11 +44,12 @@
                 @click:append="passwordShow = !passwordShow"
                 class="mx-5"
               ></v-text-field>
-              <span class="blue--text mx-5">Forget Password</span>
+              <span class="blue--text mx-5"><router-link to="/forget-password" style="text-decoration: none; text-transform: none"
+                        >Forget Password</router-link></span>
             </v-flex>
             <v-flex xs12 sm12 md12 lg12 class="my-8 mx-5 pt-3">
               <v-btn text color="primary" class="px-0 sign-in-instead">
-                <router-link to="/" style="text-decoration: none"
+                <router-link to="/" style="text-decoration: none; text-transform: none"
                   >Create New Account</router-link
                 >
               </v-btn>
@@ -64,7 +65,7 @@
 </template>
 
 <script>
-const axios = require('axios');
+const axios = require("axios");
 
 export default {
   name: "LogIn",
@@ -103,17 +104,21 @@ export default {
       if (this.emailFlag && this.passwordFlag) {
         axios
           .post("http://fundoonotes.incubation.bridgelabz.com/api/user/login", {
-            email: this.email,
-            password: this.password,
-            service: "advance"
+            "username": this.email,
+            "password": this.password,
+            "service": "advance"
           })
           .then(function (response) {
-            console.log(response);
+              console.log(response);
+              if (response.status) {
+                  alert("login successfull");
+              } else {
+                  alert("login un-successfull");
+              }
           })
           .catch(function (error) {
             console.log(error);
           });
-        
       }
     },
   },
