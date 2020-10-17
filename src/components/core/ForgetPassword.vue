@@ -15,7 +15,10 @@
                   <b>Forgot Your Password</b>
                 </div>
                 <div class="mb-3">
-                  <b class="mx-5" style="text-align: center">Enter your email address and we'll send you a link to reset your password</b>
+                  <b class="mx-5" style="text-align: center"
+                    >Enter your email address and we'll send you a link to reset
+                    your password</b
+                  >
                 </div>
               </div>
             </v-flex>
@@ -30,12 +33,21 @@
                 :rules="rulesForEmail"
                 class="mx-5 mt-5"
               ></v-text-field>
-              <span class="blue--text mx-5"><router-link to="/log-in" style="text-decoration: none; text-transform: none"
-                        >Remember Password</router-link></span>
+              <span class="blue--text mx-5"
+                ><router-link
+                  to="/log-in"
+                  style="text-decoration: none; text-transform: none"
+                  >Remember Password</router-link
+                ></span
+              >
             </v-flex>
             <v-flex xs12 sm12 md12 lg12 class="my-8 mx-5 pt-3">
-              <v-btn color="primary" class="mb-5 submit-buttom" @click="sendResetLink">
-                  <!-- <router-link to="/reset-password" style="text-decoration: none; text-transform: none"
+              <v-btn
+                color="primary"
+                class="mb-5 submit-buttom"
+                @click="sendResetLink"
+              >
+                <!-- <router-link to="/reset-password" style="text-decoration: none; text-transform: none"
                         >Submit</router-link> -->
                 Submit
               </v-btn>
@@ -48,7 +60,7 @@
 </template>
 
 <script>
-//const axios = require("axios");
+const axios = require("axios");
 
 export default {
   name: "ForgetPassword",
@@ -70,12 +82,27 @@ export default {
     };
   },
   methods: {
-      sendResetLink: function() {
-          if (this.emailFlag) {
-              console.log(this.email);
-          }
+    sendResetLink: function () {
+      const requestedPage = this.$router;
+      if (this.emailFlag) {
+        axios
+          .post("http://fundoonotes.incubation.bridgelabz.com/api/user/reset", {
+            email: this.email,
+          })
+          .then(function (response) {
+            console.log(response);
+            if (response.status == 200) {
+              requestedPage.push("/resetpassword/");
+            } else {
+              alert("email address not currect");
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       }
-   },
+    },
+  },
 };
 </script>
 

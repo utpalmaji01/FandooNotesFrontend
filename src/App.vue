@@ -10,15 +10,15 @@
 
 <script>
 
-export default {
-  name: "App",
+// export default {
+//   name: "App",
 
-  components: {
+//   components: {
     
-  },
+//   },
 
-  data: () => ({
-    //
-  }),
-};
-</script>
+//   data: () => ({
+//     //
+//   }),
+// };
+// </script>

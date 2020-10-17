@@ -44,7 +44,7 @@
                 @click:append="passwordShow = !passwordShow"
                 class="mx-5"
               ></v-text-field>
-              <span class="blue--text mx-5"><router-link to="/forget-password" style="text-decoration: none; text-transform: none"
+              <span class="blue--text mx-5"><router-link to="/reset" style="text-decoration: none; text-transform: none"
                         >Forget Password</router-link></span>
             </v-flex>
             <v-flex xs12 sm12 md12 lg12 class="my-8 mx-5 pt-3">

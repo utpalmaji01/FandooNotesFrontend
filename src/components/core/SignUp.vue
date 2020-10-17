@@ -46,7 +46,6 @@
                       hint="You can use letters, numbers & periods"
                       label="UserName"
                       autocomplete="off"
-                      suffix="@gmail.com"
                       v-model="email"
                       :rules="rulesForEmail"
                     ></v-text-field>
@@ -123,6 +122,7 @@
 
 <script>
 import axios from "axios";
+//import VueRouter from 'vue-router'
 
 export default {
   name: "SignUp",
@@ -138,7 +138,7 @@ export default {
       lastNameFlag: false,
       userNameFlag: false,
       passwordFlag: false,
-      passwordShow: false,
+      passwordShow: true,
       rulesForFirstName: [
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 3 || "Min 3 characters",
@@ -163,7 +163,7 @@ export default {
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 8 || "Min 8 characters",
         (value) => {
-          const pattern = /^[0-9a-z]+[+_.-]?[0-9a-z]{1,}$/;
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           return pattern.test(value)
             ? (this.userNameFlag = true)
             : "Invalid e-main";
@@ -191,6 +191,7 @@ export default {
   },
   methods: {
     addPerson: function () {
+      const requestedPage = this.$router;
       if (
         this.firstNameFlag &&
         this.lastNameFlag &&
@@ -203,18 +204,18 @@ export default {
             {
               firstName: this.firstName,
               lastName: this.lastName,
-              email: this.email + "@gmail.com",
+              email: this.email,
               password: this.password,
               service: "advance",
             }
           )
           .then(function (response) {
             console.log(response);
-            // if (response.status == 200) {
-            //   this.$router.push({ path: "/log-in" });
-            // } else {
-            //   alert("sign up un-successfull");
-            // }
+            if (response.status == 200) {
+              requestedPage.push("/log-in");
+            } else {
+              alert("sign up un-successfull");
+            }
           })
           .catch(function (error) {
             console.log(error);
