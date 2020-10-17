@@ -12,7 +12,7 @@ const routes =  [
     { path: '/', component: SignUp },
     { path: '/log-in', component: LogIn },
     { path: '/reset', component: ForgetPassword },
-    { path: '/resetpassword/', component: ResetPassword },
+    { path: '/resetpassword/*', component: ResetPassword },
 ]
 
 const router = new VueRouter({

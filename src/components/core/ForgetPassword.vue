@@ -83,7 +83,6 @@ export default {
   },
   methods: {
     sendResetLink: function () {
-      const requestedPage = this.$router;
       if (this.emailFlag) {
         axios
           .post("http://fundoonotes.incubation.bridgelabz.com/api/user/reset", {
@@ -92,7 +91,7 @@ export default {
           .then(function (response) {
             console.log(response);
             if (response.status == 200) {
-              requestedPage.push("/resetpassword/");
+              console.log("email sent successfully")
             } else {
               alert("email address not currect");
             }

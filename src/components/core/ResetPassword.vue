@@ -100,10 +100,26 @@ export default {
   },
   methods: {
     resetPassword: function () {
-        if (this.passwordFlag) {
-            console.log(this.password);
-            
-        }
+      if (this.passwordFlag) {
+        // axios
+        //   .post(
+        //     "http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password",
+        //     {
+        //       "newPassword": this.password
+        //     }
+        //   )
+        //   .then(function (response) {
+        //     console.log(response);
+        //     if (response.status == 200) {
+        //       alert("password successfully changed");
+        //     } else {
+        //       alert("some problem occur");
+        //     }
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
+      }
     },
   },
 };
