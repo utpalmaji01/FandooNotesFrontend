@@ -3,7 +3,9 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import router from './routes'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+// export const apiResultBus = new Vue();
 
 new Vue({
   vuetify,

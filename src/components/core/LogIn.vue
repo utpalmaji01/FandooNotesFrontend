@@ -44,18 +44,28 @@
                 @click:append="passwordShow = !passwordShow"
                 class="mx-5"
               ></v-text-field>
-              <span class="blue--text mx-5"><router-link to="/reset" style="text-decoration: none; text-transform: none"
-                        >Forget Password</router-link></span>
+              <span class="blue--text mx-5"
+                ><router-link
+                  to="/reset"
+                  style="text-decoration: none; text-transform: none"
+                  >Forget Password</router-link
+                ></span
+              >
             </v-flex>
             <v-flex xs12 sm12 md12 lg12 class="my-8 mx-5 pt-3">
               <v-btn text color="primary" class="px-0 sign-in-instead">
-                <router-link to="/" style="text-decoration: none; text-transform: none"
+                <router-link
+                  to="/"
+                  style="text-decoration: none; text-transform: none"
                   >Create New Account</router-link
                 >
               </v-btn>
               <v-btn color="primary" class="sign-in-next" @click="singIn">
                 SignIn
               </v-btn>
+              <v-snackbar text v-model="snackbarShow" :timeout="timeout">
+                <span>{{ text }}</span>
+              </v-snackbar>
             </v-flex>
           </v-flex>
         </v-layout>
@@ -65,7 +75,8 @@
 </template>
 
 <script>
-const axios = require("axios");
+import apiService from "../../servece/APIService.js";
+// import { apiResultBus } from "../../main";
 
 export default {
   name: "LogIn",
@@ -74,9 +85,12 @@ export default {
     return {
       email: "",
       password: "",
+      timeout: 16000,
+      text: "LogIn SuccessFull",
       passwordShow: false,
       emailFlag: false,
       passwordFlag: false,
+      snackbarShow: false,
       rulesForEmail: [
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 8 || "Min 8 characters",
@@ -102,23 +116,11 @@ export default {
   methods: {
     singIn: function () {
       if (this.emailFlag && this.passwordFlag) {
-        axios
-          .post("http://fundoonotes.incubation.bridgelabz.com/api/user/login", {
-            "username": this.email,
-            "password": this.password,
-            "service": "advance"
-          })
-          .then(function (response) {
-              console.log(response);
-              if (response.status) {
-                  alert("login successfull");
-              } else {
-                  alert("login un-successfull");
-              }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        apiService.userLogIn(this.email, this.password);
+        // apiResultBus.$on("apiResultBus", (data) => {
+        //   this.snackbarShow = data;
+        //   console.log("result = " + this.snackbarShow);
+        // });
       }
     },
   },

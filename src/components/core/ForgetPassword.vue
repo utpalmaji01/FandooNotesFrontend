@@ -47,9 +47,7 @@
                 class="mb-5 submit-buttom"
                 @click="sendResetLink"
               >
-                <!-- <router-link to="/reset-password" style="text-decoration: none; text-transform: none"
-                        >Submit</router-link> -->
-                Submit
+              Submit
               </v-btn>
             </v-flex>
           </v-flex>
@@ -60,7 +58,7 @@
 </template>
 
 <script>
-const axios = require("axios");
+import apiService from '../../servece/APIService.js'
 
 export default {
   name: "ForgetPassword",
@@ -84,21 +82,22 @@ export default {
   methods: {
     sendResetLink: function () {
       if (this.emailFlag) {
-        axios
-          .post("http://fundoonotes.incubation.bridgelabz.com/api/user/reset", {
-            email: this.email,
-          })
-          .then(function (response) {
-            console.log(response);
-            if (response.status == 200) {
-              console.log("email sent successfully")
-            } else {
-              alert("email address not currect");
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+          apiService.sendResetLink(this.email);
+        // axios
+        //   .post("http://fundoonotes.incubation.bridgelabz.com/api/user/reset", {
+        //     email: this.email,
+        //   })
+        //   .then(function (response) {
+        //     console.log(response);
+        //     if (response.status == 200) {
+        //       console.log("email sent successfully")
+        //     } else {
+        //       alert("email address not currect");
+        //     }
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+        //   });
       }
     },
   },

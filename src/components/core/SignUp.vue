@@ -108,21 +108,17 @@
                   alt=""
                   class="account-image"
                 />
-                <span>One account. All of Google working for you.</span>
               </v-flex>
             </v-flex>
           </v-layout>
         </v-flex>
-
-        <v-flex xs12 sm12 md12 lg12 xl12 class="mt-3 footer"> </v-flex>
       </v-layout>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-//import VueRouter from 'vue-router'
+import apiService from '../../servece/APIService.js'
 
 export default {
   name: "SignUp",
@@ -191,35 +187,14 @@ export default {
   },
   methods: {
     addPerson: function () {
-      const requestedPage = this.$router;
+      const requestedPage = this;
       if (
         this.firstNameFlag &&
         this.lastNameFlag &&
         this.userNameFlag &&
         this.passwordFlag
       ) {
-        axios
-          .post(
-            "http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp",
-            {
-              firstName: this.firstName,
-              lastName: this.lastName,
-              email: this.email,
-              password: this.password,
-              service: "advance",
-            }
-          )
-          .then(function (response) {
-            console.log(response);
-            if (response.status == 200) {
-              requestedPage.push("/log-in");
-            } else {
-              alert("sign up un-successfull");
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        apiService.newUserSignUp(this.firstName,this.lastName,this.email,this.password,requestedPage);
       }
     },
   },
