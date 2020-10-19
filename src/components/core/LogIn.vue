@@ -76,7 +76,7 @@
 
 <script>
 import apiService from "../../servece/APIService.js";
-// import { apiResultBus } from "../../main";
+import { apiResultBus } from "../../main";
 
 export default {
   name: "LogIn",
@@ -117,10 +117,10 @@ export default {
     singIn: function () {
       if (this.emailFlag && this.passwordFlag) {
         apiService.userLogIn(this.email, this.password);
-        // apiResultBus.$on("apiResultBus", (data) => {
-        //   this.snackbarShow = data;
-        //   console.log("result = " + this.snackbarShow);
-        // });
+        apiResultBus.$on("apiResultBus", (data) => {
+          this.snackbarShow = data;
+          console.log("result = " + this.snackbarShow);
+        });
       }
     },
   },

@@ -1,5 +1,5 @@
 import axios from "axios";
-// import { apiResultBus } from '../../src/main';
+import { apiResultBus } from '../../src/main';
 const newUserSignUp = (firstNameOfUser, lastNameOfUser, emailOfUser, passwordOfUser, requestedPage) => {
     axios
         .post(
@@ -34,10 +34,10 @@ const userLogIn = function(emailOfUser, passwordOfUser)  {
         .then(function (response) {
             console.log(response);
             if (response.status == 200) {
-                // apiResultBus.$emit('apiResultBus', true);
+                apiResultBus.$emit('apiResultBus', true);
 
             } else {
-                // apiResultBus.$emit('apiResultBus', false);
+                apiResultBus.$emit('apiResultBus', false);
             }
         })
         .catch(function (error) {
@@ -68,4 +68,3 @@ export default {
     userLogIn,
     sendResetLink
 }
-//export default newUserSignUp;
