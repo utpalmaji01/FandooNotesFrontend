@@ -51,7 +51,7 @@
               </v-btn>
             </v-flex>
             <v-snackbar text v-model="snackbarShow" :timeout="timeout">
-              <span class="snackbar-text">{{ text }}</span>
+              <span>{{ text }}</span>
             </v-snackbar>
           </v-flex>
         </v-layout>
