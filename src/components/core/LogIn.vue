@@ -63,10 +63,10 @@
               <v-btn color="primary" class="sign-in-next" @click="singIn">
                 SignIn
               </v-btn>
-              <v-snackbar text v-model="snackbarShow" :timeout="timeout">
-                <span>{{ text }}</span>
-              </v-snackbar>
             </v-flex>
+            <v-snackbar text v-model="snackbarShow" :timeout="timeout">
+              <span>{{ text }}</span>
+            </v-snackbar>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -85,7 +85,7 @@ export default {
     return {
       email: "",
       password: "",
-      timeout: 16000,
+      timeout: 1500,
       text: "LogIn SuccessFull",
       passwordShow: false,
       emailFlag: false,
@@ -119,7 +119,6 @@ export default {
         apiService.userLogIn(this.email, this.password);
         apiResultBus.$on("apiResultBus", (data) => {
           this.snackbarShow = data;
-          console.log("result = " + this.snackbarShow);
         });
       }
     },

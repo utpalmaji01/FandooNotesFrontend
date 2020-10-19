@@ -53,9 +53,9 @@ const sendResetLink = (emailOfUser) => {
         .then(function (response) {
             console.log(response);
             if (response.status == 200) {
-                console.log("email sent successfully")
+                apiResultBus.$emit('apiResultBus', true);
             } else {
-                alert("email address not currect");
+                apiResultBus.$emit('apiResultBus', false);
             }
         })
         .catch(function (error) {

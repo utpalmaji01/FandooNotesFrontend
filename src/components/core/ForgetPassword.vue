@@ -47,9 +47,12 @@
                 class="mb-5 submit-buttom"
                 @click="sendResetLink"
               >
-              Submit
+                Submit
               </v-btn>
             </v-flex>
+            <v-snackbar text v-model="snackbarShow" :timeout="timeout">
+              <span class="snackbar-text">{{ text }}</span>
+            </v-snackbar>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -58,7 +61,8 @@
 </template>
 
 <script>
-import apiService from '../../servece/APIService.js'
+import apiService from "../../servece/APIService.js";
+import { apiResultBus } from "../../main";
 
 export default {
   name: "ForgetPassword",
@@ -67,6 +71,9 @@ export default {
     return {
       email: "",
       emailFlag: false,
+      timeout: 1500,
+      text: "Reset link sent successfull",
+      snackbarShow: false,
       rulesForEmail: [
         (value) => !!value || "Required.",
         (value) => (value || "").length >= 8 || "Min 8 characters",
@@ -82,22 +89,10 @@ export default {
   methods: {
     sendResetLink: function () {
       if (this.emailFlag) {
-          apiService.sendResetLink(this.email);
-        // axios
-        //   .post("http://fundoonotes.incubation.bridgelabz.com/api/user/reset", {
-        //     email: this.email,
-        //   })
-        //   .then(function (response) {
-        //     console.log(response);
-        //     if (response.status == 200) {
-        //       console.log("email sent successfully")
-        //     } else {
-        //       alert("email address not currect");
-        //     }
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
+        apiService.sendResetLink(this.email);
+        apiResultBus.$on("apiResultBus", (data) => {
+          this.snackbarShow = data;
+        });
       }
     },
   },
