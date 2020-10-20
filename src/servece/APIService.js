@@ -1,5 +1,6 @@
 import axios from "axios";
 import { apiResultBus } from '../../src/main';
+
 const newUserSignUp = (signUpObject, requestedPage) => {
     axios
         .post(
@@ -17,21 +18,20 @@ const newUserSignUp = (signUpObject, requestedPage) => {
         });
 }
 
-const userLogIn = (logInObject) => {
-    axios
+const userLogIn = async (logInObject) => {
+    let requestStatus = await axios
         .post(
             process.env.VUE_APP_LOG_IN_API_PATH, logInObject)
         .then(function (response) {
             console.log(response);
-            if (response.status == 200) {
-                apiResultBus.$emit('apiResultBus', true);
-            } else {
-                apiResultBus.$emit('apiResultBus', false);
-            }
+            return response.status;
         })
         .catch(function (error) {
             console.log(error);
+            return error;
         });
+        console.log(requestStatus);
+        return requestStatus;
 }
 
 const sendResetLink = (emailOfUser) => {
