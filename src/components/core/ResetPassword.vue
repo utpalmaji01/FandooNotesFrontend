@@ -70,7 +70,6 @@
 
 <script>
 import apiService from "../../servece/APIService.js";
-import { apiResultBus } from "../../main";
 
 export default {
   name: "ResetPassword",
@@ -106,13 +105,13 @@ export default {
     };
   },
   methods: {
-    resetPassword: function () {
+    resetPassword: async function () {
       if (this.passwordFlag) {
         let token = window.location.pathname.slice(15);
-        apiService.resetNewPassword(this.passwordFlag, token);
-        apiResultBus.$on("apiResultBus", (data) => {
-          this.snackbarShow = data;
-        });
+        let responceStatus =await apiService.resetNewPassword(this.passwordFlag, token);
+        if (responceStatus == 200) {
+          this.snackbarShow = true;
+        }
       }
     },
   },

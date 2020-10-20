@@ -62,7 +62,6 @@
 
 <script>
 import apiService from "../../servece/APIService.js";
-import { apiResultBus } from "../../main";
 
 export default {
   name: "ForgetPassword",
@@ -87,12 +86,12 @@ export default {
     };
   },
   methods: {
-    sendResetLink: function () {
+    sendResetLink: async function () {
       if (this.emailFlag) {
-        apiService.sendResetLink(this.email);
-        apiResultBus.$on("apiResultBus", (data) => {
-          this.snackbarShow = data;
-        });
+        let responceStatus = await apiService.sendResetLink(this.email);
+        if (responceStatus == 200) {
+          this.snackbarShow = true;
+        }
       }
     },
   },

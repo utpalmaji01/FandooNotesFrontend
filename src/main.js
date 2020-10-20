@@ -5,7 +5,6 @@ import router from './routes'
 
 Vue.config.productionTip = false;
 
-export const apiResultBus = new Vue();
 
 new Vue({
   vuetify,

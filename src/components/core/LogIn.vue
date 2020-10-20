@@ -120,8 +120,8 @@ export default {
           "username": this.email,
           "password": this.password
         }
-        let result =await apiService.userLogIn(logInObject);
-        if (result == 200) {
+        let responceStatus =await apiService.userLogIn(logInObject);
+        if (responceStatus == 200) {
           this.snackbarShow = true;
         }
       }

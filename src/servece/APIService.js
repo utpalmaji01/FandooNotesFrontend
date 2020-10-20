@@ -1,5 +1,4 @@
 import axios from "axios";
-import { apiResultBus } from '../../src/main';
 
 const newUserSignUp = (signUpObject, requestedPage) => {
     axios
@@ -30,30 +29,27 @@ const userLogIn = async (logInObject) => {
             console.log(error);
             return error;
         });
-        console.log(requestStatus);
         return requestStatus;
 }
 
-const sendResetLink = (emailOfUser) => {
-    axios
+const sendResetLink = async (emailOfUser) => {
+    let requestStatus = await axios
         .post(process.env.VUE_APP_RESET_API_PATH, {
             email: emailOfUser
         })
         .then(function (response) {
             console.log(response);
-            if (response.status == 200) {
-                apiResultBus.$emit('apiResultBus', true);
-            } else {
-                apiResultBus.$emit('apiResultBus', false);
-            }
+            return response.status;
         })
         .catch(function (error) {
             console.log(error);
+            return error;
         });
+        return requestStatus;
 }
 
-const resetNewPassword = (newPasswordOfUser, token) => {
-    axios
+const resetNewPassword = async (newPasswordOfUser, token) => {
+    let requestStatus = await axios
         .post(
             process.env.VUE_APP_RESET_NEW_PASSWPRD_API_PATH + token,
             {
@@ -62,15 +58,13 @@ const resetNewPassword = (newPasswordOfUser, token) => {
         )
         .then(function (response) {
             console.log(response);
-            if (response.status == 200) {
-                apiResultBus.$emit('apiResultBus', true);
-            } else {
-                apiResultBus.$emit('apiResultBus', false);
-            }
+            return response.status;
         })
         .catch(function (error) {
             console.log(error);
+            return error;
         });
+        return requestStatus;
 }
 
 export default {
