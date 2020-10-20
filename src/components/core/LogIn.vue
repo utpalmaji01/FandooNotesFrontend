@@ -118,7 +118,7 @@ export default {
       if (this.emailFlag && this.passwordFlag) {
         let logInObject = {
           "username": this.email,
-            "password": this.password
+          "password": this.password
         }
         apiService.userLogIn(logInObject);
         apiResultBus.$on("apiResultBus", (data) => {
