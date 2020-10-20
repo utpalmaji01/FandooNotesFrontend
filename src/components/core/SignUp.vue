@@ -162,7 +162,7 @@ export default {
           const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
           return pattern.test(value)
             ? (this.userNameFlag = true)
-            : "Invalid e-main";
+            : "Invalid e-mail";
         },
       ],
       rulesForPass: [
@@ -202,7 +202,6 @@ export default {
           service: "advance",
         };
         let responce = await apiService.newUserSignUp( signUpObject );
-        console.log(responce);
         if (responce.status == 200) {
           requestedPage.$router.push("/log-in");
         }

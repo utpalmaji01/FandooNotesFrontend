@@ -75,9 +75,7 @@
 </template>
 
 <script>
-// var apiService = require("../../service/APIService.js");
 import apiService from "../../service/APIService.js";
-
 
 export default {
   name: "LogIn",

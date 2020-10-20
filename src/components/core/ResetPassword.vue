@@ -112,7 +112,7 @@ export default {
           "newPassword": this.password
         };
         let responce =await apiService.resetNewPassword(resetPasswordObject, token);
-        if (responce.status == 200) {
+        if (responce.status == 204) {
           this.snackbarShow = true;
         }
       }
