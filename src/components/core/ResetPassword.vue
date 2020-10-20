@@ -108,7 +108,10 @@ export default {
     resetPassword: async function () {
       if (this.passwordFlag) {
         let token = window.location.pathname.slice(15);
-        let responceStatus =await apiService.resetNewPassword(this.passwordFlag, token);
+        let resetPasswordObject = {
+          "newPassword": this.password
+        };
+        let responceStatus =await apiService.resetNewPassword(resetPasswordObject, token);
         if (responceStatus == 200) {
           this.snackbarShow = true;
         }

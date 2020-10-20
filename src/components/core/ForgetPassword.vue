@@ -88,7 +88,10 @@ export default {
   methods: {
     sendResetLink: async function () {
       if (this.emailFlag) {
-        let responceStatus = await apiService.sendResetLink(this.email);
+        let resetPasswordObject = {
+          email: this.email
+        };
+        let responceStatus = await apiService.sendResetLink(resetPasswordObject);
         if (responceStatus == 200) {
           this.snackbarShow = true;
         }

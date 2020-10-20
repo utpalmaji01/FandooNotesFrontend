@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const newUserSignUp = (signUpObject, requestedPage) => {
-    axios
+const newUserSignUp = async (signUpObject, requestedPage) => {
+    await axios
         .post(
             process.env.VUE_APP_SIGN_UP_API_PATH, signUpObject)
         .then(function (response) {
@@ -32,11 +32,9 @@ const userLogIn = async (logInObject) => {
         return requestStatus;
 }
 
-const sendResetLink = async (emailOfUser) => {
+const sendResetLink = async (resetPasswordObject) => {
     let requestStatus = await axios
-        .post(process.env.VUE_APP_RESET_API_PATH, {
-            email: emailOfUser
-        })
+        .post(process.env.VUE_APP_RESET_API_PATH, resetPasswordObject)
         .then(function (response) {
             console.log(response);
             return response.status;
@@ -48,13 +46,11 @@ const sendResetLink = async (emailOfUser) => {
         return requestStatus;
 }
 
-const resetNewPassword = async (newPasswordOfUser, token) => {
+const resetNewPassword = async (resetPasswordObject, token) => {
     let requestStatus = await axios
         .post(
             process.env.VUE_APP_RESET_NEW_PASSWPRD_API_PATH + token,
-            {
-                newPassword: newPasswordOfUser
-            }
+            resetPasswordObject
         )
         .then(function (response) {
             console.log(response);

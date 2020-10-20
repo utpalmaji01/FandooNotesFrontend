@@ -75,6 +75,7 @@
 </template>
 
 <script>
+// var apiService = require("../../servece/APIService.js");
 import apiService from "../../servece/APIService.js";
 
 
