@@ -78,7 +78,7 @@ export default {
   data() {
     return {
       timeout: 1500,
-      text: "LogIn SuccessFull",
+      text: "Password change successfully",
       snackbarShow: false,
       password: "",
       passwordFlag: false,
