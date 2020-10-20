@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import apiService from "../../servece/APIService.js";
+import apiService from "../../service/APIService.js";
 
 export default {
   name: "ResetPassword",
@@ -111,8 +111,8 @@ export default {
         let resetPasswordObject = {
           "newPassword": this.password
         };
-        let responceStatus =await apiService.resetNewPassword(resetPasswordObject, token);
-        if (responceStatus == 200) {
+        let responce =await apiService.resetNewPassword(resetPasswordObject, token);
+        if (responce.status == 200) {
           this.snackbarShow = true;
         }
       }

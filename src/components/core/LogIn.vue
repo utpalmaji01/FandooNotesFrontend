@@ -75,8 +75,8 @@
 </template>
 
 <script>
-// var apiService = require("../../servece/APIService.js");
-import apiService from "../../servece/APIService.js";
+// var apiService = require("../../service/APIService.js");
+import apiService from "../../service/APIService.js";
 
 
 export default {
@@ -121,8 +121,8 @@ export default {
           "username": this.email,
           "password": this.password
         }
-        let responceStatus =await apiService.userLogIn(logInObject);
-        if (responceStatus == 200) {
+        let responce = await apiService.userLogIn(logInObject);
+        if (responce.status == 200) {
           this.snackbarShow = true;
         }
       }

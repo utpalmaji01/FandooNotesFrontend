@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import apiService from "../../servece/APIService.js";
+import apiService from "../../service/APIService.js";
 
 export default {
   name: "SignUp",
@@ -186,7 +186,7 @@ export default {
     };
   },
   methods: {
-    addPerson: function () {
+    addPerson: async function () {
       const requestedPage = this;
       if (
         this.firstNameFlag &&
@@ -201,7 +201,11 @@ export default {
           password: this.password,
           service: "advance",
         };
-        apiService.newUserSignUp( signUpObject, requestedPage );
+        let responce = await apiService.newUserSignUp( signUpObject );
+        console.log(responce);
+        if (responce.status == 200) {
+          requestedPage.$router.push("/log-in");
+        }
       }
     },
   },

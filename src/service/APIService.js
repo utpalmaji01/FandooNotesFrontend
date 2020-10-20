@@ -1,20 +1,23 @@
 import axios from "axios";
 
-const newUserSignUp = async (signUpObject, requestedPage) => {
-    await axios
+const newUserSignUp = async (signUpObject) => {
+    let requestStatus = await axios
         .post(
             process.env.VUE_APP_SIGN_UP_API_PATH, signUpObject)
         .then(function (response) {
             console.log(response);
-            if (response.status == 200) {
-                requestedPage.$router.push("/log-in");
-            } else {
-                alert("sign up un-successfull");
-            }
+            return response;
+            // if (response.status == 200) {
+            //     requestedPage.$router.push("/log-in");
+            // } else {
+            //     alert("sign up un-successfull");
+            // }
         })
         .catch(function (error) {
             console.log(error);
+            return error;
         });
+    return requestStatus;
 }
 
 const userLogIn = async (logInObject) => {
@@ -23,13 +26,13 @@ const userLogIn = async (logInObject) => {
             process.env.VUE_APP_LOG_IN_API_PATH, logInObject)
         .then(function (response) {
             console.log(response);
-            return response.status;
+            return response;
         })
         .catch(function (error) {
             console.log(error);
             return error;
         });
-        return requestStatus;
+    return requestStatus;
 }
 
 const sendResetLink = async (resetPasswordObject) => {
@@ -37,13 +40,13 @@ const sendResetLink = async (resetPasswordObject) => {
         .post(process.env.VUE_APP_RESET_API_PATH, resetPasswordObject)
         .then(function (response) {
             console.log(response);
-            return response.status;
+            return response;
         })
         .catch(function (error) {
             console.log(error);
             return error;
         });
-        return requestStatus;
+    return requestStatus;
 }
 
 const resetNewPassword = async (resetPasswordObject, token) => {
@@ -54,13 +57,13 @@ const resetNewPassword = async (resetPasswordObject, token) => {
         )
         .then(function (response) {
             console.log(response);
-            return response.status;
+            return response;
         })
         .catch(function (error) {
             console.log(error);
             return error;
         });
-        return requestStatus;
+    return requestStatus;
 }
 
 export default {
