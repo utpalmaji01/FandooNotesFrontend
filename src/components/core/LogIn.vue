@@ -116,7 +116,11 @@ export default {
   methods: {
     singIn: function () {
       if (this.emailFlag && this.passwordFlag) {
-        apiService.userLogIn(this.email, this.password);
+        let logInObject = {
+          "username": this.email,
+            "password": this.password
+        }
+        apiService.userLogIn(logInObject);
         apiResultBus.$on("apiResultBus", (data) => {
           this.snackbarShow = data;
         });

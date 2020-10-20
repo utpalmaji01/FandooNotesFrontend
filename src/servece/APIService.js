@@ -1,17 +1,9 @@
 import axios from "axios";
 import { apiResultBus } from '../../src/main';
-const newUserSignUp = (firstNameOfUser, lastNameOfUser, emailOfUser, passwordOfUser, requestedPage) => {
+const newUserSignUp = ( signUpObject, requestedPage) => {
     axios
         .post(
-            "http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp",
-            {
-                firstName: firstNameOfUser,
-                lastName: lastNameOfUser,
-                email: emailOfUser,
-                password: passwordOfUser,
-                service: "advance",
-            }
-        )
+            "http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp", signUpObject)
         .then(function (response) {
             console.log(response);
             if (response.status == 200) {
@@ -25,17 +17,13 @@ const newUserSignUp = (firstNameOfUser, lastNameOfUser, emailOfUser, passwordOfU
         });
 }
 
-const userLogIn = function(emailOfUser, passwordOfUser)  {
+const userLogIn = (logInObject) => {
     axios
-        .post("http://fundoonotes.incubation.bridgelabz.com/api/user/login", {
-            "username": emailOfUser,
-            "password": passwordOfUser
-        })
+        .post("http://fundoonotes.incubation.bridgelabz.com/api/user/login", logInObject)
         .then(function (response) {
             console.log(response);
             if (response.status == 200) {
                 apiResultBus.$emit('apiResultBus', true);
-
             } else {
                 apiResultBus.$emit('apiResultBus', false);
             }
@@ -63,8 +51,30 @@ const sendResetLink = (emailOfUser) => {
         });
 }
 
+const resetNewPassword = (newPasswordOfUser, token) => {
+    axios
+          .post(
+            "http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password?access_token=" + token,
+            {
+              newPassword: newPasswordOfUser
+            }
+          )
+          .then(function (response) {
+            console.log(response);
+            if (response.status == 200) {
+                apiResultBus.$emit('apiResultBus', true);
+            } else {
+                apiResultBus.$emit('apiResultBus', false);
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+}
+
 export default {
     newUserSignUp,
     userLogIn,
-    sendResetLink
+    sendResetLink,
+    resetNewPassword
 }

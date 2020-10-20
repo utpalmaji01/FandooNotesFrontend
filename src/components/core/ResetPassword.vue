@@ -58,6 +58,9 @@
                 Submit
               </v-btn>
             </v-flex>
+            <v-snackbar text v-model="snackbarShow" :timeout="timeout">
+              <span>{{ text }}</span>
+            </v-snackbar>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -66,13 +69,17 @@
 </template>
 
 <script>
-//const axios = require("axios");
+import apiService from "../../servece/APIService.js";
+import { apiResultBus } from "../../main";
 
 export default {
   name: "ResetPassword",
   components: {},
   data() {
     return {
+      timeout: 1500,
+      text: "LogIn SuccessFull",
+      snackbarShow: false,
       password: "",
       passwordFlag: false,
       passwordShow: false,
@@ -101,24 +108,11 @@ export default {
   methods: {
     resetPassword: function () {
       if (this.passwordFlag) {
-        // axios
-        //   .post(
-        //     "http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password",
-        //     {
-        //       "newPassword": this.password
-        //     }
-        //   )
-        //   .then(function (response) {
-        //     console.log(response);
-        //     if (response.status == 200) {
-        //       alert("password successfully changed");
-        //     } else {
-        //       alert("some problem occur");
-        //     }
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-        //   });
+        let token = window.location.pathname.slice(15);
+        apiService.resetNewPassword(this.passwordFlag, token);
+        apiResultBus.$on("apiResultBus", (data) => {
+          this.snackbarShow = data;
+        });
       }
     },
   },

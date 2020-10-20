@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import apiService from '../../servece/APIService.js'
+import apiService from "../../servece/APIService.js";
 
 export default {
   name: "SignUp",
@@ -194,7 +194,14 @@ export default {
         this.userNameFlag &&
         this.passwordFlag
       ) {
-        apiService.newUserSignUp(this.firstName,this.lastName,this.email,this.password,requestedPage);
+        let signUpObject = {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          password: this.password,
+          service: "advance",
+        };
+        apiService.newUserSignUp( signUpObject, requestedPage );
       }
     },
   },
