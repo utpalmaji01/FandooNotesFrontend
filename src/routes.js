@@ -8,7 +8,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 
-const routes =  [
+const routes = [
     { path: '/', component: SignUp },
     { path: '/log-in', component: LogIn },
     { path: '/reset', component: ForgetPassword },

@@ -89,7 +89,7 @@ export default {
     sendResetLink: async function () {
       if (this.emailFlag) {
         let forgotPasswordObject = {
-          email: this.email
+          email: this.email,
         };
         let responce = await apiService.sendResetLink(forgotPasswordObject);
         if (responce.status == 200) {

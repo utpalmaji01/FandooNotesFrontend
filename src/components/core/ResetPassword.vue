@@ -109,9 +109,12 @@ export default {
       if (this.passwordFlag) {
         let token = window.location.pathname.slice(15);
         let resetPasswordObject = {
-          "newPassword": this.password
+          newPassword: this.password,
         };
-        let responce =await apiService.resetNewPassword(resetPasswordObject, token);
+        let responce = await apiService.resetNewPassword(
+          resetPasswordObject,
+          token
+        );
         if (responce.status == 204) {
           this.snackbarShow = true;
         }
