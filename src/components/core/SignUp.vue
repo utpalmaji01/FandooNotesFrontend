@@ -211,5 +211,5 @@ export default {
 };
 </script>
 
-<style src="../../css/SignUp.css" scoped>
+<style lang="scss" src="../../css/SignUp.scss" scoped>
 </style>

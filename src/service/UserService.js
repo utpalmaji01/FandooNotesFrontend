@@ -21,14 +21,14 @@ import axios from "axios";
  * @params {urlPath} data i.e. API path where the action needs to be done
  * @params {object} data i.e. set of key & value pair to be accepted by the server
  */
-const userServicies = async (urlPath, object) => {
-    return await axios
+const userServicies = (urlPath, object) => {
+    return axios
         .post(urlPath, object)
-        .then(function (response) {
+        .then( (response) => {
             console.log(response);
             return response;
         })
-        .catch(function (error) {
+        .catch( (error) => {
             console.log(error);
             return error;
         });

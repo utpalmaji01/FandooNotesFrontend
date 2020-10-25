@@ -101,5 +101,5 @@ export default {
 };
 </script>
 
-<style src="../../css/ForgetPassword.css" scoped>
+<style lang="scss" src="../../css/ForgetPassword.scss" scoped>
 </style>

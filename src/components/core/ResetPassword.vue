@@ -124,5 +124,5 @@ export default {
 };
 </script>
 
-<style src="../../css/ResetPassword.css" scoped>
+<style lang="scss" src="../../css/ResetPassword.scss" scoped>
 </style>

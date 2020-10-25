@@ -129,5 +129,5 @@ export default {
 };
 </script>
 
-<style src="../../css/LogIn.css" scoped>
+<style lang="scss" src="../../css/LogIn.scss" scoped>
 </style>
