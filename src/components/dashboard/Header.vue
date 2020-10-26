@@ -2,9 +2,7 @@
   <v-card color="grey lighten-4" flat tile >
     <v-toolbar dense height="60">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
       <v-toolbar-title><v-icon title="refresh">mdi-google-keep</v-icon>FundooNotes</v-toolbar-title>
-
       <v-spacer></v-spacer>
 
       <v-text-field
@@ -16,9 +14,8 @@
         class="mt-7 mx-5 pa-1"
       >
       </v-text-field>
-
       <v-spacer></v-spacer>
-
+      
       <v-btn icon>
         <v-icon title="refresh">mdi-reload</v-icon>
       </v-btn>
