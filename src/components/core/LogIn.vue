@@ -46,7 +46,7 @@
               ></v-text-field>
               <span class="blue--text mx-5"
                 ><router-link
-                  to="/reset"
+                  to="/forgetpassword"
                   style="text-decoration: none; text-transform: none"
                   >Forget Password</router-link
                 ></span
